@@ -1,0 +1,36 @@
+[project]
+name = "med-asr-finetune"
+version = "0.1.0"
+description = "A project that fine tunes Google HAI-DEF's MedASR model using Vertex AI Pipelines with Kubeflow Pipelines SDK."
+readme = "README.md"
+requires-python = "==3.11.*"
+dependencies = [
+    "datasets[audio]",
+    "evaluate",
+    "jiwer",
+    "numba",
+    "numpy",
+    "torchaudio",
+    "torchcodec",
+    "torchvision",
+    "transformers[torch]",
+    "torch==2.4.*",
+]
+
+[dependency-groups]
+dev = [
+    "dotenv>=0.9.9",
+    "google-cloud-aiplatform>=1.133.0",
+    "google-cloud-pipeline-components>=2.22.0",
+    "kfp>=2.15.2",
+]
+
+[tool.uv.sources]
+transformers = { git = "https://github.com/huggingface/transformers.git", rev = "65dc261512cbdb1ee72b88ae5b222f2605aad8e5" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/trainer"]
